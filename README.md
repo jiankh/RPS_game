@@ -1,2 +1,2 @@
 # RPS_game
-Rock Paper Scissor Mini Gae
+Rock Paper Scissor Mini Game
