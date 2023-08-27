@@ -18,6 +18,7 @@
 
 
         function playRound(playerSelection, computerSelection) {
+
             if (computerSelection === playerSelection) {
                 return "Its a Draw!"
             } else if (computerSelection === "rock" && playerSelection === "paper") {
@@ -34,9 +35,14 @@
                 return "You Lose! Scissor beats paper"
             }}
 
-        const playerSelection = "Rock"
-        const computerSelection = getComputerChoice()
-        console.log(playRound(playerSelection,computerSelection))
+
+        function game() {
+            for (let i = 0; i < 5; i++) {
+                const playerSelection = prompt("Rock, Paper, or Scissor?")
+                const computerSelection = getComputerChoice()
+                console.log(playRound(playerSelection,computerSelection))
+            }
+        }
 
         
 
