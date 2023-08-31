@@ -3,6 +3,9 @@
   <head><title>Rock - Paper - Scissor</title></head>
   <body>
 
+
+    <div class="main-screen"></div>
+
     <button class="btn btn-rock">Rock</button>
     <button class="btn btn-paper">Paper</button>
     <button class="btn btn-scissor">Scissor</button>
@@ -62,10 +65,14 @@
         const buttons = document.querySelectorAll('.btn')
         buttons.forEach( (button) => {
             button.addEventListener('click', () => {
-                console.log(playRound(`${button.textContent}`))
+                writeOnMainScreen(playRound(`${button.textContent}`))
             })
         })
 
+        function writeOnMainScreen(string) {
+            let mainScreen = document.querySelector(".main-screen")
+            mainScreen.textContent = string
+        }
 
     </script>
   </body>
