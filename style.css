@@ -1,0 +1,36 @@
+body {
+    background: lightblue;
+    font-family: fantasy;
+    margin:0;
+  }
+
+h1 {
+    display: flex;
+    font-size: 3rem;
+    justify-content: center;
+    margin: 0;
+    background-color: white;
+    padding: 30px;
+}
+
+.computer-container {
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    max-width: 200px;
+}
+
+.computer-container img {
+    max-width: 300px;
+}
+
+.computer-selection {
+    display: flex;
+    justify-content:center;
+    gap: 5rem;
+
+}
+
+  
