@@ -19,18 +19,60 @@ h1 {
 }
 
 img {
-    max-width: 200px;
+    max-width: 150px;
 }
 
 .computer-container img {
     max-width: 300px;
 }
 
-.computer-selection {
+.computer-selection, .player-selection {
     display: flex;
     justify-content:center;
     gap: 5rem;
+    padding-top: 2rem;
+}
 
+
+.main-screen {
+    display: flex;
+    justify-content: center;
+    min-height: 100px;
+    margin: 75px;
+}
+ 
+
+.screen-container {
+    display:flex;
+    flex-direction: column;
+    display:flex;
+    /* background-color: white; */
+    min-height: 100px;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2rem;
+}
+
+.scoreboard {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%
+}
+
+.screen {
+    margin-top: 5rem;
+}
+
+
+.player-selection img:hover {
+    cursor: pointer;
+    /* transform:scale(1.1) */
+}
+
+.played {
+    transform:scale(1.5);
 }
 
   

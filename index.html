@@ -15,23 +15,34 @@
 <body>
     <h1> Rock  Paper  Scissor</h1>
 
-    <div class="computer-container">
+    <!-- <div class="computer-container">
         <img src="images/computer.png">
-    </div>
+    </div> -->
 
     <div class="computer-selection">
-        <img src="images/rockC.png">
-        <img src="images/paperC.png">
-        <img src="images/scissorC.png">
+        <img src="images/rockC.png" id="rockC">
+        <img src="images/paperC.png" id="paperC">
+        <img src="images/scissorC.png" id="scissorC">
     </div>
     
 
-    <div class="main-screen"></div>
+    <div class="main-screen">
+        <div class="screen-container">
+            <div class="scoreboard">
+                <div class="player-score">Player Score: 0</div>
+                <div class="round-number">Round 1</div>
+                <div class="computer-score"> Computer Score: 0</div>
+            </div>
+            <div class="screen">Make your choice!</div>
+        </div>
+    
+    </div>
 
-    <img src="images/rockP.png" class="btn btn-rock">
-    <img src="images/paperP.png" class="btn btn-paper">
-    <img src="images/scissorP.png" class="btn btn-scissor">
-
+    <div class="player-selection">
+        <img src="images/rockP.png" class="btn btn-rock" id="rock">
+        <img src="images/paperP.png" class="btn btn-paper" id="paper">
+        <img src="images/scissorP.png" class="btn btn-scissor" id="scissor">
+    </div>
 
     <script>
         function getComputerChoice() {
@@ -49,20 +60,41 @@
         function playRound(playerSelection) {
             const computerSelection = getComputerChoice()
             const playerChoice = playerSelection.toLowerCase()
+            resetTransform()
 
             if (computerSelection === playerChoice) {
+                transformPlayedChoice(`#${computerSelection}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "Its a Draw!"
+
             } else if (computerSelection === "rock" && playerChoice === "paper") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Win! Paper beats rock"
+
             } else if (computerSelection === "rock" && playerChoice === "scissor") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Lose! Rock beats scissor"
+
             } else if (computerSelection === "paper" && playerChoice === "rock") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Lose! Paper beats rock"
+
             } else if (computerSelection === "paper" && playerChoice === "scissor") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Win! Scissor beats paper"
+
             } else if (computerSelection === "scissor" && playerChoice === "rock") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Win! Rock beats scissor"
+
             } else if (computerSelection === "scissor" && playerChoice === "paper") {
+                transformPlayedChoice(`#${playerChoice}`)
+                transformPlayedChoice(`#${computerSelection}C`)
                 return "You Lose! Scissor beats paper"
             }
         }
@@ -80,14 +112,31 @@
         const buttons = document.querySelectorAll('.btn')
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
-                writeOnMainScreen(playRound(`${button.textContent}`))
+                writeOnMainScreen(playRound(`${button.id}`))
             })
         })
 
+
+
+        
         function writeOnMainScreen(string) {
-            let mainScreen = document.querySelector(".main-screen")
+            let mainScreen = document.querySelector(".screen")
             mainScreen.textContent = string
         }
+
+        function transformPlayedChoice(choice) {
+            const selection = document.querySelector(`${choice}`)
+            selection.classList.add('played')
+        }
+
+        function resetTransform() {
+            const transformedClasses = document.querySelectorAll('.played')
+            console.log(transformedClasses)
+            transformedClasses.forEach( (transed) => { 
+                transed.classList.remove('played')
+            })
+        }
+
 
     </script>
 </body>
