@@ -1,3 +1,47 @@
+//Game Elements
+
+let computerScore = 0
+let playerScore = 0
+
+if (playerScore === 5) {
+    writeOnMainScreen('You Win!')
+} 
+if (computerScore === 5) {
+    writeOnMainScreen('You Lose!')
+}
+
+const buttons = document.querySelectorAll('.btn')
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let result = playRound(`${button.id}`)
+
+        writeOnMainScreen(result)
+
+        if (result.includes('Win')) {
+            playerScore += 1
+            let playerScoreBoard = document.querySelector('.player-score')
+            playerScoreBoard.textContent = `Player Score: ${playerScore}`
+        } 
+
+        if (result.includes('Lose')) {
+            computerScore += 1
+            let computerScoreBoard = document.querySelector('.computer-score')
+            computerScoreBoard.textContent = `Computer Score: ${computerScore}`
+        }
+        
+    })
+})
+
+
+
+
+//Page elements
+
+
+
+
+//Functions
+
 function getComputerChoice() {
     const randInt = (Math.floor(Math.random() * 3)) // 0 for ROCK; 1 for PAPER; 2 for SCISSOR
     if (randInt === 0) {
@@ -52,53 +96,6 @@ function playRound(playerSelection) {
     }
 }
 
-
-    function game() {
-        let playerScore = 0
-        let computerScore = 0
-
-        for (let i = 1; i <= 5; i++ ) {
-            let roundBoard = document.querySelector('.round-number')
-            roundBoard.textContent = `Round ${i}`
-
-            const buttons = document.querySelectorAll('.btn')
-            buttons.forEach((button) => {
-                button.addEventListener('click', () => {
-                    let result = playRound(`${button.id}`)
-
-                    writeOnMainScreen(result)
-
-                    if (result.includes('Win')) {
-                        playerScore += 1
-                        let playerScoreBoard = document.querySelector('.player-score')
-                        playerScoreBoard.textContent = `Player Score: ${playerScore}`
-                    } 
-
-                    if (result.includes('Lose')) {
-                        computerScore += 1
-                        let computerScoreBoard = document.querySelector('.computer-score')
-                        computerScoreBoard.textContent = `Computer Score: ${computerScore}`
-                    }
-                    
-                }, {once: true})
-            })
-        }
-
-    }
-
-    
-
-
-
-// const buttons = document.querySelectorAll('.btn')
-// buttons.forEach((button) => {
-//     button.addEventListener('click', () => {
-//         writeOnMainScreen(playRound(`${button.id}`))
-//     })
-// })
-
-
-
 function writeOnMainScreen(string) {
     let mainScreen = document.querySelector(".screen")
     mainScreen.textContent = string
@@ -117,5 +114,4 @@ function resetTransform() {
     })
 }
 
-game()
 
