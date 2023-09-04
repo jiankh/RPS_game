@@ -1,46 +1,81 @@
-//Game Elements
+//Page elements
 
 let computerScore = 0
 let playerScore = 0
+let roundCounter = 1
+
+let playerScoreBoard = document.querySelector('.player-score')
+playerScoreBoard.textContent = `Player Score: ${playerScore}`
+
+let computerScoreBoard = document.querySelector('.computer-score')
+computerScoreBoard.textContent = `Computer Score: ${computerScore}`
+
+let roundScoreBoard = document.querySelector('.round-number')
+roundScoreBoard.textContent = `Round: ${roundCounter}`
+
+
+//Game Elements
+
 
 if (playerScore === 5) {
+    removeClickListener()
     writeOnMainScreen('You Win!')
 } 
 if (computerScore === 5) {
+    removeClickListener()
     writeOnMainScreen('You Lose!')
 }
+
+
 
 const buttons = document.querySelectorAll('.btn')
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
-        let result = playRound(`${button.id}`)
-
-        writeOnMainScreen(result)
-
-        if (result.includes('Win')) {
-            playerScore += 1
-            let playerScoreBoard = document.querySelector('.player-score')
-            playerScoreBoard.textContent = `Player Score: ${playerScore}`
-        } 
-
-        if (result.includes('Lose')) {
-            computerScore += 1
-            let computerScoreBoard = document.querySelector('.computer-score')
-            computerScoreBoard.textContent = `Computer Score: ${computerScore}`
-        }
-        
+        addClickListener(button)        
     })
 })
 
 
 
 
-//Page elements
-
-
-
-
 //Functions
+
+function addClickListener(button) {
+    let result = playRound(`${button.id}`)
+
+        writeOnMainScreen(result)
+
+        if (result.includes('Win')) {
+            roundCounter += 1
+            playerScore += 1
+            let playerScoreBoard = document.querySelector('.player-score')
+            playerScoreBoard.textContent = `Player Score: ${playerScore}`
+            let roundScoreBoard = document.querySelector('.round-number')
+            roundScoreBoard.textContent = `Round: ${roundCounter}`
+        } else if (result.includes('Lose')) {
+            roundCounter += 1
+            computerScore += 1
+            let computerScoreBoard = document.querySelector('.computer-score')
+            computerScoreBoard.textContent = `Computer Score: ${computerScore}`
+            let roundScoreBoard = document.querySelector('.round-number')
+            roundScoreBoard.textContent = `Round: ${roundCounter}`
+        } else { 
+            roundCounter += 1
+            let roundScoreBoard = document.querySelector('.round-number')
+            roundScoreBoard.textContent = `Round: ${roundCounter}`
+        }
+
+
+}
+
+function removeClickListener(buttons) {
+    buttons.forEach((button) => {
+        button.removeEventListener('click', () => {
+            addClickListener(button)
+        })
+    })
+}
+
 
 function getComputerChoice() {
     const randInt = (Math.floor(Math.random() * 3)) // 0 for ROCK; 1 for PAPER; 2 for SCISSOR
