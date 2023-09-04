@@ -15,6 +15,10 @@ roundScoreBoard.textContent = `Round: ${roundCounter}`
 
 const buttons = document.querySelectorAll('.btn')
 
+const restartButtonArea = document.querySelector('.restart-button')
+const restartButton = document.createElement('button')
+restartButton.textContent = 'RESTART'
+
 
 //Game Elements
 
@@ -35,44 +39,17 @@ buttons.forEach((button) => {
 
 function checkGameStatus() {
     if (playerScore >= 5) {
-        endGame('You Win!')
+        endGame('You Win! Play again?')
     } else if (computerScore >= 5) {
-        endGame('You Lose!')
+        endGame('You Lose! Try again?')
     }
 }
 
 function endGame(result) {
-    removeClickListeners()
     writeOnMainScreen(result)
+    restartButtonArea.appendChild(restartButton)
+    restartButton.addEventListener('click', () => restartGame(), {once: true})
 }
-
-
-//adds Event Listener to the choices and adds the scores accordingly.
-// function addClickListener(button) {
-//     let result = playRound(`${button.id}`)
-
-//         writeOnMainScreen(result)
-
-//         if (result.includes('Win')) {
-//             roundCounter += 1
-//             playerScore += 1
-//             let playerScoreBoard = document.querySelector('.player-score')
-//             playerScoreBoard.textContent = `Player Score: ${playerScore}`
-//             let roundScoreBoard = document.querySelector('.round-number')
-//             roundScoreBoard.textContent = `Round: ${roundCounter}`
-//         } else if (result.includes('Lose')) {
-//             roundCounter += 1
-//             computerScore += 1
-//             let computerScoreBoard = document.querySelector('.computer-score')
-//             computerScoreBoard.textContent = `Computer Score: ${computerScore}`
-//             let roundScoreBoard = document.querySelector('.round-number')
-//             roundScoreBoard.textContent = `Round: ${roundCounter}`
-//         } else { 
-//             roundCounter += 1
-//             let roundScoreBoard = document.querySelector('.round-number')
-//             roundScoreBoard.textContent = `Round: ${roundCounter}`
-//         }
-//     }
 
 
 function addClickListener(button) {
@@ -94,12 +71,6 @@ function addClickListener(button) {
   
     checkGameStatus();
   }
-
-function removeClickListeners() {
-    buttons.forEach((button) => {
-        button.removeEventListener('click', addClickListener);
-    });
-}
 
 
 function getComputerChoice() {
@@ -174,4 +145,9 @@ function resetTransform() {
     })
 }
 
-
+function restartGame() {
+    computerScore = 0
+    playerScore = 0
+    roundCounter = 1
+    location.reload()
+}
