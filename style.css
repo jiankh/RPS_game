@@ -80,4 +80,8 @@ img {
     padding: 5px 10px;
     font-family: inherit;
 }
+
+button:hover {
+    cursor: pointer;
+}
   
